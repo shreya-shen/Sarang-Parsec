@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Selector</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha256-LXH4iLOfGlcmO6C6+B2O2Gx63nyUOW/ZDP0HA5qWtnA=" crossorigin="anonymous" />
+</head>
+<body>
+    <div class="container">
+        <div class="questionContainer" id="questionContainer">
+            <h1 id="question">How do you feel right now?</h1>
+            <form id="moodForm">
+                <label>
+                    <input type="radio" name="currentMood" value="anxious"> Anxious
+                </label>
+                <label>
+                    <input type="radio" name="currentMood" value="irritable"> Irritable
+                </label>
+                <label>
+                    <input type="radio" name="currentMood" value="restless"> Restless
+                </label>
+                <label>
+                    <input type="radio" name="currentMood" value="sad"> Sad
+                </label>
+                <label>
+                    <input type="radio" name="currentMood" value="angry"> Angry
+                </label>
+                <label>
+                    <input type="radio" name="currentMood" value="calm"> Calm
+                </label>
+                <label>
+                    <input type="radio" name="currentMood" value="happy"> Happy
+                </label>
+            </form>
+            <button type="button" onclick="nextQuestion()">Next</button>
+        </div>
+
+        <div class="questionContainer" id="questionContainer" style="display: none;">
+            <h1 id="question">How would you like to feel?</h1>
+            <form id="moodForm">
+                <label>
+                    <input type="radio" name="desiredMood" value="anxious"> Anxious
+                </label>
+                <label>
+                    <input type="radio" name="desiredMood" value="irritable"> Irritable
+                </label>
+                <label>
+                    <input type="radio" name="desiredMood" value="restless"> Restless
+                </label>
+                <label>
+                    <input type="radio" name="desiredMood" value="sad"> Sad
+                </label>
+                <label>
+                    <input type="radio" name="desiredMood" value="angry"> Angry
+                </label>
+                <label>
+                    <input type="radio" name="desiredMood" value="calm"> Calm
+                </label>
+                <label>
+                    <input type="radio" name="desiredMood" value="happy"> Happy
+                </label>
+            </form>
+            <button type="button" onclick="submitForm()">Submit</button>
+        </div>
+
+        <div id="resultContainer" style="display: none;">
+            <h2>Your playlist is being curated...</h2>
+        </div>
+    </div>
+
+    <script src="script2.js"></script>
+</body>
+</html>
