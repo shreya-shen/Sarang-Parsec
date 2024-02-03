@@ -12,12 +12,11 @@ import pandas as pd
 import time
 import numpy as np
 from numpy.linalg import norm
-from tqdm import tqdm
 
 user_feeling = input("How are you feeling? (happy, sad, angry, calm, anxious, restless): ")         # questions are here just for now
 desired_mood = input("How would you like to feel? (happy, sad, angry, calm, anxious, restless): ")
 # lets authorize and retrieve spotify object
-spotify = authorisation.auth()
+spotify = authorisation.get_spotify_client(session)
 
 genres = spotify.recommendation_genre_seeds()
 
@@ -34,7 +33,7 @@ data_dict = {
   
   
 # Get recommendation for each genre
-for genre in tqdm(genres):
+for genre in genres:
       
   recs = spotify.recommendations(genres = [genre], limit = 100)
   recs = eval(recs.model_dump_json().replace("null", "-999").replace("false", "False").replace("true", "True"))["tracks"]
