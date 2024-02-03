@@ -34,9 +34,9 @@ data_dict = {
   
 # Get recommendation for each genre
 for genre in genres:
-      
-  recs = spotify.recommendations(genres = [genre], limit = 100)
-  recs = eval(recs.model_dump_json().replace("null", "-999").replace("false", "False").replace("true", "True"))["tracks"]
+    recs = spotify.recommendations(genres=[genre], limit=10) 
+    recs = eval(recs.model_dump_json().replace("null", "-999").replace("false", "False").replace("true", "True"))["tracks"]
+
   
   for track in recs:
       data_dict["id"].append(track["id"])
@@ -44,11 +44,18 @@ for genre in genres:
       track_meta = spotify.track(track["id"])
       data_dict["track_name"].append(track_meta.name)
       data_dict["artist_name"].append(track_meta.album.artists[0].name)
-      track_features = spotify.track_audio_features(track["id"])
+      try:
+        track_features = spotify.track_audio_features(track["id"])
+      except tekore.TooManyRequests as e:
+        print(f"Rate limit exceeded. Waiting for {e.retry_after} seconds.")
+        time.sleep(e.retry_after)
+        track_features = spotify.track_audio_features(track["id"])
+        
       data_dict["valence"].append(track_features.valence)
       data_dict["energy"].append(track_features.energy)
       data_dict["user_feeling"].append(user_feeling) 
       data_dict["desired_mood"].append(desired_mood)
+      time.sleep(1)
 
 def get_mood_vector(feeling):
     mood_mapping = {
